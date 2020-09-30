@@ -1,0 +1,57 @@
+package guru.springframework.hcopetclinic.bootstrap;
+
+
+import guru.springframework.hcopetclinic.model.Owner;
+import guru.springframework.hcopetclinic.model.Vet;
+import guru.springframework.hcopetclinic.services.OwnerService;
+import guru.springframework.hcopetclinic.services.VetService;
+import guru.springframework.hcopetclinic.services.map.OwnerServiceMap;
+import guru.springframework.hcopetclinic.services.map.VetServiceMap;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
+@Component
+public class DataLoader implements CommandLineRunner {
+
+    private final OwnerService ownerService;
+    private final VetService vetService;
+
+    public DataLoader() {
+
+        this.ownerService = new OwnerServiceMap();
+        this.vetService = new VetServiceMap();
+    }
+
+    @Override
+    public void run(String... args) throws Exception {
+        Owner owner1 = new Owner();
+        owner1.setId(1L);
+        owner1.setFirstName("Hans");
+        owner1.setLastName("Corsmit");
+
+        ownerService.save(owner1);
+
+        Owner owner2 = new Owner();
+        owner2.setId(2L);
+        owner2.setFirstName("Kaat");
+        owner2.setLastName("Schoot");
+
+        ownerService.save(owner2);
+
+        System.out.println("Loaded owners....");
+
+        Vet vet1 = new Vet();
+        vet1.setId(1L);
+        vet1.setFirstName("Poemba");
+        vet1.setLastName("The cat");
+
+        vetService.save(vet1);
+
+        Vet vet2 = new Vet();
+        vet2.setId(2L);
+        vet2.setFirstName("Rosa");
+        vet2.setLastName("The dog");
+
+        vetService.save(vet2);
+    }
+}
