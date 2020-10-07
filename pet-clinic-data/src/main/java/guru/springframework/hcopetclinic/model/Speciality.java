@@ -1,7 +1,14 @@
 package guru.springframework.hcopetclinic.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "specialities")
 public class Speciality extends BaseEntity {
 
+    @Column(name = "description")
     public String getDescription() {
         return description;
     }
