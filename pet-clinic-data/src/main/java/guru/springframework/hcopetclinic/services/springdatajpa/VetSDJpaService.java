@@ -6,6 +6,9 @@ import guru.springframework.hcopetclinic.services.VetService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Service
 @Profile("springdatajpa")
 public class VetSDJpaService implements VetService {
@@ -18,7 +21,7 @@ public class VetSDJpaService implements VetService {
 
     @Override
     public Set<Vet> findAll() {
-        Set<Vet> vets = new HashSet<>():
+        Set<Vet> vets = new HashSet<>();
         vetRepository.findAll().forEach(vets::add);
         return vets;
     }
