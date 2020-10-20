@@ -2,10 +2,7 @@ package guru.springframework.hcopetclinic.bootstrap;
 
 
 import guru.springframework.hcopetclinic.model.*;
-import guru.springframework.hcopetclinic.services.OwnerService;
-import guru.springframework.hcopetclinic.services.PetTypeService;
-import guru.springframework.hcopetclinic.services.SpecialityService;
-import guru.springframework.hcopetclinic.services.VetService;
+import guru.springframework.hcopetclinic.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -18,12 +15,14 @@ public class DataLoader implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final SpecialityService specialityService;
+    private final VisitService visitService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialityService specialityService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialityService specialityService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialityService = specialityService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -79,6 +78,13 @@ public class DataLoader implements CommandLineRunner {
 
         ownerService.save(owner2);
 
+        Visit visit1 = new Visit();
+        visit1.setDate(LocalDate.now());
+        visit1.setPet(rosa);
+        visit1.setDescription("Sneezy dog");
+
+        visitService.save(visit1);
+
         System.out.println("Loaded owners....");
 
         Speciality radiology = new Speciality();
@@ -107,5 +113,7 @@ public class DataLoader implements CommandLineRunner {
         vet2.getSpecialities().add(surgery);
 
         vetService.save(vet2);
+
+
     }
 }
